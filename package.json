@@ -2,6 +2,8 @@
   "name": "personal-blog",
   "type": "module",
   "version": "0.0.1",
+  "author": "Illia Raietskyi",
+  "keywords": ["astro", "blog"],
   "engines": {
     "node": ">=22.12.0"
   },
