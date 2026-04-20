@@ -32,8 +32,6 @@ const { title, description, image = FallbackImage } = Astro.props;
 />
 <meta name="generator" content={Astro.generator} />
 
-<Font cssVariable="--font-atkinson" preload />
-
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
@@ -55,3 +53,15 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<script is:inline type='text/javascript' src='https://rentafont.com/javascripts/webfonts.js' async />
+<script is:inline type='text/javascript'>
+	WebFontConfig = {
+		id: 'NDM0NTI5b3JkZXIzMzM5MTA=',
+		fonts: [
+			/*'Quietism Variable Roman'*/'16177487',
+			/*'Epoch YP Light'*/'16177488'
+		],
+		by_style: 1
+	};
+</script>
