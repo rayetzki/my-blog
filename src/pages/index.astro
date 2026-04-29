@@ -1,18 +1,110 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
+import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => (b.data.pubDate?.valueOf() ?? 0) - (a.data?.pubDate?.valueOf() ?? 0),
+);
+
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.posts {
+				display: flex;
+				flex-direction: column;
+				align-items: stretch;
+				justify-content: stretch;
+				gap: 4rem;
+				list-style-type: none;
+			
+				& li * {
+					transition: 0.2s ease;
+				}
+				& li a {
+					text-decoration: underline double;
+				}
+
+				@media (max-width: 720px) {
+
+					& li {
+						width: 100%;
+						text-align: center;
+					}
+				}
+			}
+
+			.description {
+				margin-block: 0.5em;
+			}
+			
+			.title {
+				margin: 0;
+				color: rgb(var(--black));
+				line-height: 1.7;
+			}
+
+			.additional {	
+				display: inline-flex;
+				flex-direction: row;
+				align-items: baseline;
+				gap: 2rem;
+
+				& > *:not(:first-child) {
+					list-style-type: square;
+				}
+
+				.category, .description {
+					width: max-content;
+				}
+			}
+
+			.continue-reading {
+				text-underline-offset: 3px;
+				text-underline-position: from-font;
+				-ms-text-underline-position: from-font;
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
-			З'їж ще цих м'яких французьких булок, ще цих м'яких французьких булок, ще цих м'яких французьких булок.
+			<section>
+				<ul class="posts">
+					{
+						posts.map((post) => (
+							<li>
+								<h2 class="title">{post.data.title}</h2>
+								<ul class="additional">
+									<li>
+										<p class="category">
+											{post.data.category}
+										</p>
+									</li>
+									{post.data.pubDate && (
+										<li>
+											<p class="date">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+										</li>
+									)}
+								</ul>
+								<p class="description">{post.data.description}</p>
+								<a href={`/blog/${post.id}/`} class="continue-reading">
+									<b>Continue Reading</b>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+
 		</main>
 	</body>
 </html>
