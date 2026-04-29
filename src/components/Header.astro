@@ -10,8 +10,8 @@ import HeaderLink from "./HeaderLink.astro";
       <HeaderLink href="https://Pt.me/ukraina_libertaria" target="_blank">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="52px"
-          height="52px"
+          width="34px"
+          height="34px"
           viewBox="0 0 24 24"
           fill="none"
         >
@@ -20,15 +20,32 @@ import HeaderLink from "./HeaderLink.astro";
             fill="#000000"></path>
         </svg>
       </HeaderLink>
+      <HeaderLink href="rss.xml">
+        <svg
+          width="24px"
+          height="24px"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+            <title>ionicons-v5_logos</title>
+            <path d="M108.56,342.78a60.34,60.34,0,1,0,60.56,60.44A60.63,60.63,0,0,0,108.56,342.78Z"></path>
+            <path d="M48,186.67v86.55c52,0,101.94,15.39,138.67,52.11s52,86.56,52,138.67h86.66C325.33,312.44,199.67,186.67,48,186.67Z"></path>
+            <path d="M48,48v86.56c185.25,0,329.22,144.08,329.22,329.44H464C464,234.66,277.67,48,48,48Z"></path>
+        </svg>
+      </HeaderLink>
     </div>
   </nav>
 </header>
 <style>
   header {
     margin: 0;
-    padding: 0 1em;
     background: white;
-    box-shadow: 0 2px 8px rgba(var(--black), 5%);
+    position: sticky;
+    inset: 0;
+    box-shadow:
+      0 5px 5px -3px rgb(0,0,0,0.1), 
+      0 8px 10px 1px rgba(0,0,0,0.07), 
+      0 3px 14px 2px rgba(0,0,0,0.06);
   }
   h2 {
     margin: 0;
@@ -36,6 +53,10 @@ import HeaderLink from "./HeaderLink.astro";
     font-family: var(--content-font);
     font-style: normal;
     font-weight: 700;
+
+    @media screen and (max-width: 720px) {
+      font-size: 1.5rem;
+    }
   }
 
   h2 a,
@@ -46,7 +67,8 @@ import HeaderLink from "./HeaderLink.astro";
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5em;
+    padding-block: 0.75em;
+    padding-inline: 1em;
   }
   nav a {
     color: var(--black);
@@ -57,5 +79,12 @@ import HeaderLink from "./HeaderLink.astro";
   }
   a:has(svg) {
     display: grid;
+  }
+
+  .social-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
   }
 </style>
